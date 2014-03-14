@@ -154,64 +154,82 @@ name[0] = 'b'
 does not.
 
 Ch-Ch-Ch-Changes
+=================
 
-Data that can be changed is called mutable, while data that cannot be is called immutable. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in Python—there actually are languages that will let people do this, with predictably confusing results). Lists and arrays, on the other hand, are mutable: both can be modified after they have been created.
+Data that can be changed is called mutable, while data that cannot be is called immutable. Like strings, numbers are immutable: there's no way to make the number 0 have the value 1 or vice versa (at least, not in R—there actually are languages that will let people do this, with predictably confusing results). vectors, dataframes, and matricess, on the other hand, are mutable: they can be modified after they have been created.
 
 Programs that modify data in place can be harder to understand than ones that don't because readers may have to mentally sum up many lines of code in order to figure out what the value of something actually is. On the other hand, programs that modify data in place instead of creating copies that are almost identical to the original every time they want to make a small change are much more efficient.
-There are many ways to change the contents of in lists besides assigning to elements:
+There are many ways to change the contents besides assigning to elements:
 
-odds.append(11)
-print 'odds after adding a value:', odds
-del odds[0]
-print 'odds after removing the first element:', odds
-odds.reverse()
-print 'odds after reversing:', odds
+	odds = c(1,3,5,7,9)
+	odds = append(odds, 13)
+	odds = odds + 1
+	odds = odds[-1]
+	odds = sort(odds, decreasing = TRUE)
+	
 Challenges
+-------------
 
-Write a function called total that calculates the sum of the values in a list. (Python has a built-in function called sum that does this for you. Please don't use it for this exercise.)
+1. Write a function called total that calculates the sum of the values in a list. (R has a built-in function called `sum` that does this for you. Please don't use it for this exercise.)
+
+		total = function(vector){
+		#calculates the sum of the values in a vector
+			sum = 0
+			for (i n 1:length(vector)){
+			sum = sum + vector[i]
+			}
+		return(sum)
+		}
+
+
 Processing Multiple Files
+==========================
+We now have almost everything we need to process all our data files. 
 
-We now have almost everything we need to process all our data files. The only thing that's missing is a library with a rather unpleasant name:
+What we need is a function that finds files whose names match a pattern. We provide those patterns as strings: the character * matches zero or more characters, while ? matches any one character. We can use this to get the names of all the R files we have created so far:
 
-import glob
-The glob library contains a single function, also called glob, that finds files whose names match a pattern. We provide those patterns as strings: the character * matches zero or more characters, while ? matches any one character. We can use this to get the names of all the IPython Notebooks we have created so far:
+	list.files(pattern = "*.R")
 
-print glob.glob('*.ipynb')
-['01-numpy.ipynb', '02-func.ipynb', '03-loop.ipynb', '04-cond.ipynb', '05-defensive.ipynb', '06-cmdline.ipynb', 'spatial-intro.ipynb']
 or to get the names of all our CSV data files:
 
-print glob.glob('*.csv')
-['inflammation-01.csv', 'inflammation-02.csv', 'inflammation-03.csv', 'inflammation-04.csv', 'inflammation-05.csv', 'inflammation-06.csv', 'inflammation-07.csv', 'inflammation-08.csv', 'inflammation-09.csv', 'inflammation-10.csv', 'inflammation-11.csv', 'inflammation-12.csv', 'small-01.csv', 'small-02.csv', 'small-03.csv', 'swc_bc_coords.csv']
-As these examples show, glob.glob's result is a list of strings, which means we can loop over it to do something with each filename in turn. In our case, the "something" we want is our analyze function. Let's test it by analyzing the first three files in the list:
+	list.files(pattern="*.csv", recursive = TRUE)
+	
+As these examples show, `list.files()` result is a list of strings, which means we can loop over it to do something with each filename in turn. In our case, the "something" we want is our analyze function. Let's test it by analyzing the first three files in the list:
 
-filenames = glob.glob('*.csv')
-filenames = filenames[0:3]
-for f in filenames:
-    print f
-    analyze(f)
-inflammation-01.csv
-inflammation-02.csv
-inflammation-03.csv
+	filenames = list.files(pattern = "*.csv", recursive = TRUE) 	filenames = filenames[1:3]
+	
+	for (f in 1:length(filenames)){
+		print (filenames[f])
+		analyze(filenames[f])
+		}
+	
 Sure enough, the maxima of these data sets show exactly the same ramp as the first, and their minima show the same staircase structure.
 
 Challenges
+--------------
 
-Write a function called analyze_all that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+1. Write a function called `analyze_all` that takes a filename pattern as its sole argument and runs analyze for each file whose name matches the pattern.
+
+
 Key Points
+=============
 
-Use for variable in collection to process the elements of a collection one at a time.
-The body of a for loop must be indented.
-Use len(thing) to determine the length of something that contains other values.
-[value1, value2, value3, ...] creates a list.
-Lists are indexed and sliced in the same way as strings and arrays.
-Lists are mutable (i.e., their values can be changed in place).
-Strings are immutable (i.e., the characters in them cannot be changed).
-Use glob.glob(pattern) to create a list of files whose names match a pattern.
-Use * in a pattern to match zero or more characters, and ? to match any single character.
+* Use `for variable in collection` to process the elements of a collection one at a time.
+* The body of a for loop should be indented.
+* Use `length(thing)` to determine the length of something that contains other values.
+* c(value1, value2, value3, …) creates a vector
+* Vectors are indexed and sliced in the same way as strings and arrays.
+* vectors are mutable (i.e., their values can be changed in place).
+* Use `list.files(pattern)` to create a list of files whose names match a pattern.
+* Use `*` in a pattern to match zero or more characters.
+
+
 Next Steps
+------------
 
 We have now solved our original problem: we can analyze any number of data files with a single command. More importantly, we have met two of the most important ideas in programming:
 
-Use functions to make code easier to re-use and easier to understand.
-Use lists and arrays to store related values, and loops to repeat operations on them.
-We have one more big idea to introduce, and then we will be able to go back and create a heat map like the one we initially used to display our first data set.
+* Use functions to make code easier to re-use and easier to understand.
+* Use vectors and arrays to store related values, and loops to repeat operations on them.
+
+We have one more big idea to introduce...
