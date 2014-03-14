@@ -3,11 +3,12 @@
 # load libraries
 
 # set working directory
-setwd("/Users/sarah/Desktop/instructor_notes/R/data/")
+setwd("/Users/sarah/Documents/GitHub/2014-03-17-nyu-R/instructor_notes/R")
 
 # read the data
-data = read.csv("inflammation-01.csv", header=F)
+data = read.csv("data/inflammation-01.csv", header=F)
 
+source("rblocks.R")
 datamatrix = as.matrix(data)
 
 avg_inflammation = c()
@@ -113,3 +114,151 @@ analyze = function(filename){
   plot(time, min_inflammation)
   plot(time, max_inflammation)
 }
+
+total = function(vector){
+  #calculates the sum of the values in a vector
+  sum = 0
+  for (i in 1:length(vector)){
+    sum = sum + vector[i]
+  }
+  return(sum)
+}
+
+
+num = 37
+if (num > 100) {
+  print ('greater')
+}
+else{
+  print ('not greater')
+}  
+print ('done')
+
+
+num = 53
+print ('before conditional...')
+if (num > 100){
+  print ('53 is greater than 100')
+}
+print ('...after conditional')
+
+
+
+sign = function(num){
+  if (num > 0){
+    return (1)
+  }
+  else if (num == 0){
+    return (0)
+  }
+  else{
+    return (-1)
+  }
+}
+print (paste('sign of -3:', sign(-3)))
+
+if (1 > 0 & -1 > 0){
+  print ('both parts are true')
+}
+
+
+
+if (1 < 0 | 'left' < 'right'){
+  print ('at least one test is true')
+}
+
+
+print ('empty string is true') 
+if ('word'){ print ('word is true')} 
+if ([]){ print 'empty list is true'} if ([1, 2, 3]){ print 'non-empty list is true'}))
+if 0: print 'zero is true' if 1: print 'one is true'
+
+near = function(param1, param2){
+  #returns True if its first parameter is within 10% of its second and False otherwise.
+  ten_percent = param2 * 0.1
+  if (param1 >= (param2 - ten_percent) & param1 <= (param2 + ten_percent)){
+    return (TRUE)
+  }
+  else {
+    return(FALSE)
+  }
+}
+
+
+numbers = c(-5, 3, 2, -1, 9, 6)
+total = 0
+for (n in 1:length(numbers)){
+  if (numbers[n] >= 0){
+    total = total + numbers[n]
+  }
+} 
+print (paste('sum of positive values:', total))
+
+pos_total = 0
+neg_total = 0
+for (n in 1:length(numbers)){
+  if (numbers[n] >= 0){
+    pos_total = pos_total + numbers[n]
+  }
+  else{
+    neg_total = neg_total + numbers[n]
+  }
+}
+print (paste('negative and positive sums are:', neg_total, pos_total))
+
+for (consonant in 1:nchar('bcd')){
+  for (vowel in 1:nchar('ae')){
+    print (c(consonant, vowel))
+  }
+}
+
+square = ImageGrid(5, 5)
+for x in range(square.width):
+  for y in range(square.height):
+  if x < y:
+  square[x, y] = colors['Fuchsia']
+elif x == y:
+  square[x, y] = colors['Olive']
+else:
+  square[x, y] = colors['SlateGray']
+square.show()
+
+height = 5
+width = 5
+square = block_grid(height, width, type="matrix")
+for( x in 1:5){
+  for (y in 1:5){
+    if (x < y){
+      square[x,y] = "hotpink"
+    }
+    else if (x == y) {
+      square[x,y] = "Gray40"
+    }
+    else{
+      square[x,y] = "chartreuse"
+    }
+  }
+}
+square
+
+
+mean = mean(as.matrix(data))
+height = nrow(data)
+width = ncol(data)
+heatmap = block_grid(height, width, type="matrix")
+
+for (x in seq(1:height)){
+  for (y in seq(1:width)){
+    if (data[x, y] < mean){
+      heatmap[x, y] = "red"
+    } 
+    else if (data[x, y] == mean){
+      heatmap[x, y] = "green"
+    }
+    else{
+      heatmap[x, y] = "blue"
+    }
+  }
+}
+heatmap
+
