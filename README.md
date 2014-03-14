@@ -1,5 +1,6 @@
 Software Carpentry Bootcamps
 ============================
+NYU
 
 This repository's `gh-pages` branch is the starting point for a bootcamp website:
 it contains a template for your bootcamp's home page
