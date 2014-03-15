@@ -67,6 +67,7 @@ One challenging concept for those new to R is the recycling rule. rBlocks can be
 In this example, we are using a logical vector c(T, F) to access elements of the vector grid4. According to the recycling rule, this short vector is expanded out as c(T, F, T, F, T) to match the length of grid4. The grid image makes on top makes it easy to understand what is happening.
 
 R has lots of ways to refer to colors:
+
 * http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
 * http://colorbrewer2.org
 * http://www.stat.tamu.edu/~jkim/Rcolorstyle.pdf
@@ -83,6 +84,7 @@ rBlocks can be used to motivate users to learn about basic control structures. F
 	}
 
 __Ask class to walk through what is happening step by step__
+
 1. Before running the code - what image do you expect to see? Why?
 2. What is the program doing in the first step?
 3. What will the matrix look like? How is it different from a vector?
@@ -324,6 +326,7 @@ The third step is to decide how we are going to color the cells in the heat map.
 	heatmap
 
 This may be what we asked for, but both the image and the code are hideous:
+
 * It's too large for us to view the whole thing at once on a small laptop screen.
 * Our first heatmap had time along the X axis; this seems to have time along the Y axis.
 * Red against blue is pretty hard on the eyes.
@@ -331,6 +334,7 @@ This may be what we asked for, but both the image and the code are hideous:
 * We are calculating the mean of data either once or twice each time we go through the loop. That means that on a 40×60 data set, we are performing the same calculation 2400 times.
 
 Here's how we can improve it:
+
 * We can give ImageGrid an optional parameter block_size to set the size of each block.
 * We can transpose our data before creating the grid.
 * We can pick better colors (I'm personally fond of orchid, fuchsia, and hot pink).
@@ -362,7 +366,8 @@ Our modified code looks like this:
 
 	heatmap
 
-That's a bit better—but now the contrast between the colors isn't great enough. And there still aren't very many fuchsia cells: we may want to widen the band around the mean that gets that color.
+That's a bit better—but now the contrast between the colors isn't great enough. 
+And there still aren't very many fuchsia cells: we may want to widen the band around the mean that gets that color.
 We could rewrite our loop a third time, but the right thing to do is to put our code in a function so that we can experiment with bands and colors more easily.
 
 
