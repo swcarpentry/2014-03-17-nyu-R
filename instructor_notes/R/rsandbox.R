@@ -260,5 +260,54 @@ for (x in seq(1:height)){
     }
   }
 }
+
+
+flipped = t(data)
+height = nrow(flipped)
+width = ncol(flipped)
+center = mean(as.matrix(flipped))
+
+heatmap = block_grid(height, width, type="matrix")
+
+for (x in seq(1:height)){
+  for (y in seq(1:width)){
+    if (flipped[x, y] < (0.8 * center)){
+      heatmap[x, y] = "lightpink"
+    } 
+    else if (flipped[x, y] > (1.2 * center)){
+      heatmap[x, y] = "deeppink4"
+    }
+    else{
+      heatmap[x, y] = "hotpink"
+    }
+  }
+}
+
 heatmap
+
+
+make_heatmap = function(values, low_band=0.5, high_band=1.5, low_color="gray60", 
+                        mid_color="chartreuse", high_color="darkgreen"){
+  height = nrow(values)
+  width = ncol(values)
+  result = block_grid(height, width, type="matrix")
+  center = mean(as.matrix(values))
+  
+  for (x in seq(1:height)){
+    for (y in seq(1:width)){
+      if (values[x, y] < (low_band * center)){
+        result[x, y] = low_color
+      } 
+      else if (values[x, y] > (high_band * center)){
+        result[x, y] = high_color
+      }
+      else{
+        result[x, y] = mid_color
+      }
+    }
+  }
+  return(result)
+}
+  
+
 

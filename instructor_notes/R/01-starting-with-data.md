@@ -26,6 +26,7 @@ Objectives
 * Load an R library and use the things it contains.
 * Read tabular data from a file into a program.
 * Assign values to variables.
+* Learn about data types
 * Select individual values and subsections from data.
 * Perform operations on arrays of data.
 * Display simple graphs.
@@ -154,7 +155,33 @@ First, let's ask what type of thing data refers to:
 
 The output tells us that data currently is a data.frame in R. 
 This is similar to a spreadsheet in excel, that many of us are familiar with using.
-str output tells us the dimensions and the data types (int is integer) of each column.
+
+###data frames
+are the de facto data structure for most tabular data and what we use for statistics.
+
+Data frames can have additional attributes such as rownames(), which can be useful for annotating data, like subject_id or sample_id. But most of the time they are not used.
+
+Some additional information on data frames:
+
+* Usually created by `read.csv()` and `read.table()`.
+* Can convert to matrix with `data.matrix()`
+* Coercion will be forced and not always what you expect.
+* Can also create with data.frame() function.
+* Find the number of rows and columns with nrow(df) and ncol(df), respectively.
+* Rownames are usually 1..n.
+
+__Useful functions__
+
+* `head()` - see first 6 rows
+* `tail()` - see last 6 rows
+* `dim()` - see dimensions
+* `nrow()` - number of rows
+* `ncol()` - number of columns
+* `str()` - structure of each column
+* `names()` - will list the names attribute for a data frame (or any object really), which gives the column names.
+* A data frame is a special type of list where every element of the list has same length.
+
+`str` output tells us the dimensions and the data types (int is integer) of each column.
 
 We can see what its shape is like this:
 
@@ -164,18 +191,17 @@ We can see what its shape is like this:
 
 This tells us that data has 60 rows and 40 columns. 
 
+###Indexing
+
 If we want to get a single value from the dataframe, 
 we must provide an index in square brackets, just as we do in math:
 
 	print (paste('first value in data:', data[1,1]))
 	print (paste('middle value in data:', data[30,20]))
  
-R indexes starting at 1. Programming languages like Fortran and MATLAB start counting at 1, 
+R indexes starting at 1. Programming languages like Fortran, MATLAB, and R start counting at 1, 
 because that's what human beings have done for thousands of years. 
-Languages in the C family (including C++, Java, Perl, and Python) count from 0 
-because that's simpler for computers to do. 
-As a result, if we have an R×C array in Python, 
-its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second. 
+Languages in the C family (including C++, Java, Perl, and Python) count from 0 because that's simpler for computers to do. 
 
 An index like [30, 20] selects a single element of an array, 
 but we can select whole sections as well. 
@@ -205,9 +231,47 @@ For example, we have taken rows 1, 4, 7, and 10, and columns 1, 4, 7, 10, 13, 16
 If we want to know the average inflammation of all patients on all days, 
 we cannot directly take the mean of a dataframe. But we can take it from a matrix.
 
-__Discuss difference between dataframe and matrix__
+###Matrix
+
+Matrices are a special vector in R. They are not a separate type of object but simply an atomic vector with dimensions added on to it. Matrices have rows and columns.
+
+	m <- matrix(nrow = 2, ncol = 2)
+	m
+
+	dim(m)
+
+Matrices are filled column-wise.
+
+	m <- matrix(1:6, nrow = 2, ncol = 3)
+
+Other ways to construct a matrix
+
+	m <- 1:10
+	dim(m) <- c(2, 5)
+
+This takes a vector and transform into a matrix with 2 rows and 5 columns.
+
+Another way is to bind columns or rows using cbind() and rbind().
+
+	x <- 1:3
+	y <- 10:12
+	cbind(x, y)
+
+	rbind(x, y)
+
+You can also use the byrow argument to specify how the matrix is filled. From R's own documentation:
+
+	mdat <- matrix(c(1,2,3, 11,12,13), nrow = 2, ncol = 3, byrow = TRUE,
+               dimnames = list(c("row1", "row2"),
+                               c("C.1", "C.2", "C.3")))
+	mdat
+	
+Lets convert our dataframe to a matrix, but give it a new name:
 
 	datamatrix = as.matrix(data)
+	
+And then take the mean of all the values:
+
 	mean(datamatrix)
 
 There are lots of useful built-in commands that we can use in R:
@@ -242,39 +306,22 @@ FUNCTIONS - Operations Across Axes
 What if we need the maximum inflammation for all patients, or the average for each day? 
 As the diagram below shows, we want to perform the operation across an axis:
 
-To support this, in R we will need to make a for loop. Loops have a few part. They 
+To support this, in R we can use the `apply` function:
 
-	for item in (object){
-		do stuff
-	  }
+	help(apply)
+
+Apply allows us to repeat a function on all of the rows (1), columns (2), or both(1:2) of an array or matrix.
 
 If each row is a patient, and we want to know each patient's average inflammation, 
 we will need to iterate our method across all of the rows. 
-Who remembers how to find the number of rows in our dataframe?
-
-	nrow(data)
-
-Our iterator can be named whatever we want it to be. 
-It is an index that we will use to tell the computer where we are.
-The object is the thing that we want to iterate over, usually a list or vector
-Things that happen inside the loop get updated each time that it runs
-
-
-	for (row in 1:nrow(datamatrix)){
-	avg = mean(datamatrix[row,])
-	print(avg)
-	}
+		
+		avg_inflammation = apply(data, 2, mean)
 	
-__EXERCISE__
-1. Write a function that prints the maximum inflammation for each of the days.
-2. Save these values to a vector.
-3. Do the same thing to create a min and max vectors for the data
-
-	avg_inflammation = c()
-	for (col in 1:ncol(datamatrix)){
-		avg = mean(datamatrix[,col])
-		avg_inflammation = append(avg_inflammation, avg)
-	}
+Challenge
+---------
+1. Find the maximum and minimum values for inflammation at each day (rows are patients, and columns are days).
+2. Save these values to a varible.
+3. What is the length of your new variable?
 	
 Now that we have all this summary information, we can put it back together 
 into a dataframe that we can use for further analysis and plotting, provided they are 
