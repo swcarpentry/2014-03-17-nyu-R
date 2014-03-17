@@ -359,11 +359,13 @@ Some additional information on data frames:
 * Rownames are usually 1..n.
 
 __Combining data frames__
+-------------
 
 	df <- data.frame(id = letters[1:10], x = 1:10, y = 11:20)
 	df
 
 __Useful functions__
+-------------
 
 * head() - see first 6 rows
 * tail() - see last 6 rows
@@ -388,11 +390,15 @@ See that it is actually a special list:
 
 
 __Indexing__
+-----------
+
 Vectors have positions, these positions are ordered and can be called using name_vector[index]
 	
 	names[2]
 
 __Functions__
+---------
+
 A function is a saved object that takes inputs to perform a task. 
 Functions take in information and return desired outputs.
 
@@ -401,11 +407,15 @@ output = name_of_function(inputs)
 	y = sum(x)
 
 __Help__
+--------
+
 All functions come with a help screen. 
 It is critical that you learn to read the help screens since they provide important information on what the function does, 
 how it works, and usually sample examples at the very bottom.
 
 __Install new functions__
+--------
+
 To install any new package install.packages('ggplot2')
 
 You can't ever learn all of R, but you can learn how to build a program and how to find help
