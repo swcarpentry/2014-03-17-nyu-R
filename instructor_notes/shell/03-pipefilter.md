@@ -4,7 +4,7 @@ root: ../..
 title: Pipes and Filters
 level: novice
 ---
-<div class="objectives" markdown="1">
+
 
 #### Objectives
 *   Redirect a command's output to a file.
@@ -13,7 +13,7 @@ level: novice
 *   Explain what usually happens if a program or pipeline isn't given any input to process.
 *   Explain Unix's "small pieces, loosely joined" philosophy.
 
-</div>
+
 
 Now that we know a few basic commands,
 we can finally look at the shell's most powerful feature:
@@ -337,16 +337,16 @@ the '\*' matches any number of characters;
 the expression `[AB]` matches either an 'A' or a 'B',
 so this matches all the valid data files she has.
 
-<div class="keypoints" markdown="1">
+
 
 #### Key Points
 *   `command > file` redirects a command's output to a file.
 *   `first | second` is a pipeline: the output of the first command is used as the input to the second.
 *   The best way to use the shell is to use pipes to combine simple single-purpose programs (filters).
 
-</div>
 
-<div class="challenges" markdown="1">
+
+
 
 #### Challenges
 
@@ -461,4 +461,4 @@ so this matches all the valid data files she has.
     out what animals the file contains (without any duplicates in their
     names)?
 
-</div>
+
