@@ -5,7 +5,9 @@ This is the repository for the NYU R bootcamp
 
 March 17-18, 2014
 
-Instructors: Sarah Supp and Tracy Teal
+Instructors: Sarah Supp (@srsupp) and Tracy Teal (@tracykteal)
+
+On Twitter: #swc
 
 These are the materials used in the workshop and will be updated throughout the course
 
