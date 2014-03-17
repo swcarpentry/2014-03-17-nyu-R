@@ -33,4 +33,6 @@ the command line, automate something you don't really need to automate.
 
 ### Where can I learn more about R?
 
+- [R cheatsheet] (http://www.matthewckeller.com/Short-refcard.pdf)
+- [R videos] (https://plus.google.com/+GoogleDevelopers/posts/jQYhQ4ymReQ)
 
