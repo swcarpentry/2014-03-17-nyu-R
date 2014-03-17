@@ -310,16 +310,15 @@ thesis/quotations.txt
 > `/home/vlad/data`. This only works if it is the first character in the
 > path: `here/there/~/elsewhere` is *not* `/home/vlad/elsewhere`.
 
-<div class="keypoints" markdown="1">
+
 
 #### Key Points
 *   Unix documentation uses '^A' to mean "control-A".
 *   The shell does not have a trash bin: once something is deleted, it's really gone.
 *   Nano is a very simple text editor&mdash;please use something else for real work.
 
-</div>
 
-<div class="challenges" markdown="1">
+
 
 #### Challenges
 
@@ -376,4 +375,4 @@ thesis/quotations.txt
     with most recently changed files or directories first.
     In what order does `ls -R -t` display things?
 
-</div>
+
