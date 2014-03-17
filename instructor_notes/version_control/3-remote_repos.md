@@ -47,12 +47,12 @@ Since we just pulled the repository down, we will be up to date unless there has
 
 =========================
 
-- Give a little tour of [GitHub][].
-- Have everyone make [GitHub][] accounts.
+- Give a little tour of [GitHub](github.com).
+- Have everyone make [GitHub](github.com) accounts.
 
 ### Make and Clone
 
-- Make a new demo repo on [GitHub][] explaining the process as you go
+- Make a new demo repo on [GitHub](github.com) explaining the process as you go
   (probably on your personal account).
     - Have [GitHub][] put in a README so it can be cloned.
 - Explain that much like a browser navigates to websites using a URL, git talks

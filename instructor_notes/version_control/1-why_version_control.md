@@ -1,12 +1,11 @@
 #Teaching Git - 1
 
-##Take 30 seconds and explain to your neighbor what your workflow is like when you collaborate. What tools do you use? How do you communicate?
-__3 groups share their answers__
-
-__write on board__
+1. Take 30 seconds and explain to your neighbor what your workflow is like when you collaborate. What tools do you use? How do you communicate?
+2. 
+_3 groups share their answers_
 
 ##What is Version Control?
-__any guesses?__
+_any guesses?_
 
 __Some questions__
 

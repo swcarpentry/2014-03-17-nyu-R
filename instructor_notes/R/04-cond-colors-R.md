@@ -68,10 +68,11 @@ In this example, we are using a logical vector c(T, F) to access elements of the
 
 R has lots of ways to refer to colors:
 
-* http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
-* http://colorbrewer2.org
-* http://www.stat.tamu.edu/~jkim/Rcolorstyle.pdf
-* http://alyssafrazee.com/RSkittleBrewer.html
+* [r-chart](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+* [color brewer](http://colorbrewer2.org)
+* [color styles](http://www.stat.tamu.edu/~jkim/Rcolorstyle.pdf)
+* [skittles theme colors](http://alyssafrazee.com/RSkittleBrewer.html)
+* [i want hue](http://tools.medialab.sciences-po.fr/iwanthue/)
 
 
 Control Structures
@@ -261,7 +262,7 @@ We can even put one loop inside another:
     	}
     }
 
-As the diagram below shows, the inner loop runs from start to finish each time the outer loop runs once:
+The inner loop runs from start to finish each time the outer loop runs once:
 _draw a diagram with boxes and arrows for what is happening_
 
 We can combine nesting and conditionals to create patterns in an image:
@@ -331,6 +332,7 @@ This may be what we asked for, but both the image and the code are hideous:
 * Our first heatmap had time along the X axis; this seems to have time along the Y axis.
 * Red against blue is pretty hard on the eyes.
 * The heatmap only shows two colors because none of the (integer) measurements has exactly the same value as the (fractional) mean.
+* Red-green color blindness is not uncommon (5-10% males!) [try the simulator](http://www.etre.com/tools/colourblindsimulator/)
 * We are calculating the mean of data either once or twice each time we go through the loop. That means that on a 40×60 data set, we are performing the same calculation 2400 times.
 
 Here's how we can improve it:
@@ -459,11 +461,11 @@ Challenges
 Key Points
 -------------
 * Learn how to source code
-* Use the block_grid class from the rblocks source code to create simple "images" made of colored blocks.
+* Use the `block_grid` class from the rblocks source code to create simple "images" made of colored blocks.
 * Specify colors use (red, green, blue) triples, each component of which is an integer in the range 0..255.
 * Use `if` condition to start a conditional statement, `elif` condition to provide additional tests, and `else` to provide a default.
 * The bodies of the branches of conditional statements must be indented.
-* Use == to test for equality.
+* Use `==` to test for equality.
 * X and Y is only true if both X and Y are true.
 * X or Y is true if either X or Y, or both, are true.
 * Nest loops to operate on multi-dimensional data.
