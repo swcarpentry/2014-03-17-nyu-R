@@ -4,7 +4,7 @@ root: ../..
 title: Creating Things
 level: novice
 ---
-<div class="objectives" markdown="1">
+
 
 #### Objectives
 *   Create a directory hierarchy that matches a given diagram.
@@ -12,7 +12,7 @@ level: novice
 *   Display the contents of a directory using the command line.
 *   Delete specified files and/or directories.
 
-</div>
+
 
 We now know how to explore files and directories,
 but how do we create them in the first place?
