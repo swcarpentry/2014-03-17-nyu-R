@@ -15,3 +15,22 @@ You can check out these materials using
 
 git clone https://github.com/swcarpentry/2014-03-17-nyu-R.git
 
+### Resources
+
+## Where can I learn more about the shell?
+
+- Software Carpentry tutorial - [The Unix shell](http://software-carpentry.org/v4/shell/index.html)
+- The shell handout / cheatsheet - [Command Reference](http://files.fosswire.com/2007/08/fwunixref.pdf)
+- [explainshell.com](http://explainshell.com)
+- [commandlinefu.com](http://www.commandlinefu.com/commands/browse)
+- http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html
+- man bash
+- Google - if you don't know how to do something, try Googling it. Other people
+have probably had the same question.
+- Learn by doing. There's no real other way to learn this than by trying it
+out.  Write your next paper in nano (really emacs or vi), open pdfs from
+the command line, automate something you don't really need to automate.
+
+## Where can I learn more about R?
+
+
