@@ -50,9 +50,8 @@ Getting setup
 -------------
 
 1. Install Firefox
-2. Install the SQLite Manager add on **Tools -> Add-ons -> Search -> SQLite Manager -> Install -> Restart**
-3. Download the [Portal Database](https://github.com/swcarpentry/2012-11-UNC/raw/master/SQL/portal_mammals.sqlite)
-4. Open SQLite Manager **Firefox Button -> Web Developer -> SQLite Manager** 
+2. Install the SQLite Manager add on **Tools -> Add-ons -> Search -> 'sql' -> SQLite Manager -> Install -> Restart**
+3. Open SQLite Manager **Firefox -> Web Developer -> SQLite Manager** 
     or **Tools -> SQLite Manager**
 
 The data
@@ -75,15 +74,16 @@ Import
 Data can be added that is already in a sqlite databae, or by entering CSV or TXT files manually.
 
 1. __If__ a .sqlite file already exists: Open your database: **Database -> Connect Database** Skip the other steps.
-2. __If__ you are putting together a database from .csv files: Start a New Database **Database -> New Database** 
-2. Start the import **Database -> Import**
+
+1. __If__ you are putting together a database from .csv files: Start a New Database **Database -> New Database**  You'll be asked to enter the name of the database you want to create and where you want to save it.
+2. Start to import the tables **Database -> Import** 
 3. Select the file to import
 4. Give the table a name (or use the default)
-5. If the first row has column headings, check the appropriate box
+5. If the first row has column headings, check the appropriate box (In our examples they do)
 6. Make sure the delimiter and quotation options are correct
 7. Press **OK**
 8. When asked if you want to modify the table, click **OK**
-9. Set the data types for each field
+9. Set the data types for each field ** This is important because the type matters what you can do with the data **
 
 ***EXERCISE: Import the plots and species tables***
 
@@ -200,6 +200,16 @@ If we wanted to get data for any of the Dipodomys species,
 which have species codes DM, DO, and DS we could combine the tests using OR:
 
     SELECT * FROM surveys WHERE (species = "DM") OR (species = "DO") OR (species = "DS") OR (species = "DX");
+
+We can also use regular expression type expressions
+
+    SELECT * FROM surveys WHERE (species LIKE "D%")
+
+The '%' is like the '*' wildcard. It matches 'zero or more characters'.
+
+You can also use 'not like' if you wanted all the species that were not Dipodomys species
+
+    SELECT * FROM surveys WHERE	(species NOT LIKE "D%")
 
 * How many rows of data do you have now?
 
