@@ -64,7 +64,7 @@ The rodents are sampled on a series of 24 plots, with different
 experimental manipulations of which rodents are allowed to access the plots.
 
 This is a real dataset that has been used in over 100 publications.
-I've simplified it just a little bit for the workshop,
+It's been simplified just a little bit for the workshop,
 but you can download the [full dataset](http://esapubs.org/archive/ecol/E090/118/)
 and work with it using exactly the same tools we'll learn about today.
 
@@ -201,15 +201,19 @@ which have species codes DM, DO, and DS we could combine the tests using OR:
 
     SELECT * FROM surveys WHERE (species = "DM") OR (species = "DO") OR (species = "DS") OR (species = "DX");
 
+We can also just check to see if it is in a list of species
+
+   SELECT * FROM surveys WHERE (species IN ("DM", "DO", "DS"));
+
 We can also use regular expression type expressions
 
-    SELECT * FROM surveys WHERE (species LIKE "D%")
+    SELECT * FROM surveys WHERE (species LIKE "D%");
 
 The '%' is like the '*' wildcard. It matches 'zero or more characters'.
 
 You can also use 'not like' if you wanted all the species that were not Dipodomys species
 
-    SELECT * FROM surveys WHERE	(species NOT LIKE "D%")
+    SELECT * FROM surveys WHERE	(species NOT LIKE "D%");
 
 * How many rows of data do you have now?
 
@@ -294,7 +298,7 @@ To truly be alphabetical, we might want to order by genus then species.
 	ORDER BY genus ASC, species ASC
 
 * Need to know
-  * Characters must be in quotes - just like in python!!
+  * Characters must be in quotes - just like in Python or R!!
   
 ----------------------------------------------
 
@@ -393,7 +397,7 @@ ordered by the count
     SELECT species, COUNT(*)
     FROM surveys
     GROUP BY species
-    ORDER BY COUNT(sp_code)
+    ORDER BY COUNT()
 
 ***Exercise: Write a query that lets us look at which years contained the most individuals and which had the least?***
 
@@ -425,6 +429,8 @@ Joins
 -----
 To combine data from two tables we use the SQL JOIN command,
 which comes after the FROM command.
+
+Don't do this, because it makes a really big file and can crash your program
 
     SELECT * FROM surveys JOIN species
 
@@ -461,7 +467,7 @@ actual species names.
     FROM surveys
     JOIN species ON surveys.species = species.species_id
 
-***Exercise: Write a query that the genus, the species, and the weight of every individual captured at the site***
+***Exercise: Write a query that returns the genus, the species, and the weight of every individual captured***
 
 Joins can be combined with sorting, filtering, and aggregation.
 So, if we wanted average mass of the individuals on each different
@@ -490,7 +496,7 @@ We can fix this too using AS:
     ON s.plot = p.plot_id
     GROUP BY p.plot_type
     
-***Exercise: Find your query from earlier where you the total weight, average weight, and the min and max weights
+***Exercise: Find your query from earlier where you got the total weight, average weight, and the min and max weights
 and clean up your column names using concise descriptive names***
 
 -----------------------------------------
@@ -505,7 +511,7 @@ Let's link to the species table so we can make sure that we are only including r
     JOIN plots
     JOIN species
     ON (surveys.plot = plots.plot_id) AND (surveys.species = species.species_id)
-    WHERE taxa = Rodent
+    WHERE species.taxa = 'Rodent'
     GROUP BY plots.plot_type
     
 ***Exercise: At our site Onychomys (grasshopper mouse) is considered to be functionally different from our other species.
@@ -578,12 +584,12 @@ When creating a new table we need to name it, name the columns, and state the va
 We can then update this new table by adding new information each time we collect more data.
 Note: we don't need to update rowid because it is the primary key and it should autoincrement.
 
-    INSERT INTO weather (day, month, year, precip, temp, description 
-    VALUES 22, 06, 2013, 3.1, 25, 'sunny')
+    INSERT INTO weather (day, month, year, precip, temp, description) 
+    VALUES (22, 06, 2013, 3.1, 25, 'sunny')
 
 
-    INSERT INTO weather (day, month, year, precip, temp, description
-    VALUES 23, 06, 2013, 0, 21, 'cloudy')
+    INSERT INTO weather (day, month, year, precip, temp, description)
+    VALUES (23, 06, 2013, 0, 21, 'cloudy')
     
 We can also change data in existing cells if we make a mistake, using UPDATE.
 
