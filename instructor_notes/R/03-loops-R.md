@@ -99,6 +99,7 @@ Note that a loop variable is just a variable that's being used to record progres
     	print (substr('abc',letter, letter))
 		print (paste('after the loop, letter is', letter))
 		}
+		
 Note also that finding the length of a string is such a common operation that R actually has a built-in function to do it called len:
 
 	print nchar('aeiou')
@@ -126,32 +127,112 @@ Challenges
 
 	Write a function called rev that does the same thing. As always, be sure to include a docstring.
 
+
 Lists
 ------
-FIXME-- NEEDS TO BE SPECIFIC TO R LISTS
-====================
-Just as a for loop is a way to do operations many times, a list is a way to store many values. Unlike NumPy arrays, there are built into the language. We create a list by putting values inside square brackets:
+In R lists act as containers. Unlike atomic vectors, the contents of a list are not restricted to a single mode and can encompass any mixture of data types. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
 
-odds = [1, 3, 5, 7]
-print 'odds are:', odds
-We select individual elements from lists by indexing them:
+A list is a special type of vector. Each element can be a different type.
 
-print 'first and last:', odds[0], odds[-1]
-and if we loop over a list, the loop variable is assigned elements one at a time:
 
-for number in odds:
-    print number
-There is one important difference between lists and strings: we can change the values in a list, but we cannot change the characters in a string. For example:
 
-names = ['Newton', 'Darwing', 'Turing'] # typo in Darwin's name
-print 'names is originally:', names
-names[1] = 'Darwin' # correct the name
-print 'final value of names:', names
-works, but:
+Create lists using `list()` or coerce other objects using `as.list()`
 
-name = 'Bell'
-name[0] = 'b'
-does not.
+
+```r
+x <- list(1, "a", TRUE, 1+4i)
+x
+```
+
+```
+## [[1]]
+## [1] 1
+## 
+## [[2]]
+## [1] "a"
+## 
+## [[3]]
+## [1] TRUE
+## 
+## [[4]]
+## [1] 1+4i
+```
+
+
+
+```r
+x <- 1:10
+x <- as.list(x)
+length(x)
+```
+
+```
+## [1] 10
+```
+
+
+What is the class of `x[1]`?  
+How about `x[[1]]`?
+
+
+```r
+xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
+xlist
+```
+
+```
+## $a
+## [1] "Karthik Ram"
+## 
+## $b
+##  [1]  1  2  3  4  5  6  7  8  9 10
+## 
+## $data
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+```
+
+
+What is the length of this object?
+What about its structure?
+
+A list can contain many lists nested inside.
+
+
+```r
+temp <- list(list(list(list())))
+temp
+```
+
+```
+## [[1]]
+## [[1]][[1]]
+## [[1]][[1]][[1]]
+## list()
+```
+
+```r
+is.recursive(temp)
+```
+
+```
+## [1] TRUE
+```
+
+
+Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
+
+A list does not print to the console like a vector. Instead, each element of the list starts on a new line.
+
+Elements are indexed by double brackets. Single brackets will still return a(nother) list.
+
+---
+
 
 Ch-Ch-Ch-Changes
 =================
