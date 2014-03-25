@@ -1,4 +1,4 @@
-Defensive Programming
+Basic Defensive Programming
 =======================
 
 Our previous lessons have introduced the basic tools of programming: variables and lists, finding files, loops, conditionals, and functions. What they haven't done is show us how to tell whether a program is getting the right answer, and how to tell if it's still getting the right answer as we make changes to it.
@@ -13,7 +13,11 @@ The good news is, doing these things will speed up our programming, not slow it 
 
 Objectives
 ---------------
-
+* Learn how to defensively program for potential errors
+* `stop`
+* `break`
+* `continue`
+* Progamming with version control
 
 Debugging
 -------------
