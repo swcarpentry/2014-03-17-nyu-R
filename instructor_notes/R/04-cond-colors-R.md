@@ -473,6 +473,8 @@ Key Points
 
 Next Steps
 -------------
+Let's store the functions for our code in another script, which we can name `project_functions.R`. We can source these functions using `source` at the beginning of our main script. Keeping functions in one place, at the top of our code or in a separate file, helps keep our programs more organized and can make debugging easier.
+ 
 Our final heatmap function is 17 lines long, which means that if there's a 95% chance of each line being correct, the odds of the whole function being right are only 41%. Before we go any further, we need to learn how to test whether our code is doing what we want it to do, and that will be the subject of the next lesson.
 
 	
