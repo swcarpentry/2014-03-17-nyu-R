@@ -15,6 +15,10 @@ You can check out these materials using
 
 git clone https://github.com/swcarpentry/2014-03-17-nyu-R.git
 
+Etherpad for the class
+https://etherpad.mozilla.org/ktGfUiyedF 
+ 
+
 ## Resources
 
 ### Where can I learn more about the shell?
