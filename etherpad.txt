@@ -1,0 +1,438 @@
+Welcome to MoPad!
+
+This pad text is synchronized as you type, so that everyone viewing this page sees the same text.  This allows you to collaborate seamlessly on documents!
+
+Please be cognizant of whether you are using a public pad or private/team pad, and take appropriate precautions with data you post here!
+ 
+Etherpad for the NYU R room boot camp
+Intructors: Sarah Supp and Tracy Teal
+
+We'll sometimes place commands here
+Anyone can add notes in this section
+
+If you have questions, feel free to ask them in the Chat section and just type your name in the top right, so we know who's commenting or asking questions.
+
+Head to GitHub to see all the notes! 
+
+https://github.com/swcarpentry/2014-03-17-nyu-R/tree/master
+
+git clone https://github.com/swcarpentry/2014-03-17-nyu-R/
+
+
+THE SHELL  
+--------------------
+cd change directory
+use tab complete to "autocomplete" unique long names
+ls list
+-F with flags
+-l with detials
+-lh with human readable details
+
+type "whoami" to figure out who you are in the shell
+pwd gives you your working directory
+
+cd ..    lets you go up a level when navigating in cmd line
+cd ../.. will let you go back two levels
+combining file names lets you move forward and back faster
+. means "here"
+man gets to you to the manual pages for shell help (but Google is cool too)
+ls -r shows you the files in reverse order
+
+Why use the shell?
+* some programs only run at the command line
+* might need to know how to connect to a server or remote comuter (ssh)
+* some high level programs only run on Linux
+* helps demystify how computers work (nothing hidden behind a GUI)
+
+for Macs - nano is a convenient tool to get an editor
+e.g., $ nano draft.txt
+ - quit with cntrl (^) x
+
+for Windows (and Macs) use vi
+do your writing in the editor
+ - then type: escape , : , w (write) , q (quit)
+
+mess up? 
+"q!" is quit without saving
+"u" is undo in vi
+
+$ cat randomfile.txt  
+shows us what is in the file (note cat is not the animal, stands for concactenate)
+$ less randomfile.txt
+you can take a look at it, then quit with q
+
+DANGER! deleting things in the shell - it is REALLY gone (no trash folder)
+$ rm randomfile.txt
+ note - it will not let you delete a directory with rm
+$ rmdir directoryname
+Alternatively
+$ rm -r directoryname
+ - deletes the files then the directory
+$ rm -rf directoryname means remove recursively and forcefully
+
+NEVER USE:
+ $ rm -rf *
+ (the "*" is a wildcard, and so in this context means "everything." So this command means remove everything recursively and forcefully)
+
+$ mv filename1.txt newfilename.txt
+ - to change the name of the file
+ -same command to move the file up a level
+  -- $ mv filename.txt ../
+
+what if we want a second copy? 
+ - cp filename.txt thesis/
+  -- places a copy back into the thesis directory
+ - will copy multiple files or whole directories 
+    (but for directories need to do so recursively with: $ cp -r)
+
+simple shortcuts
+ - up arrow to get previous cmd
+ - ctrl a to the beginning of the line
+ - ctrl e to get to the end of the line
+ - ctrl u to delete the entire line from the end to the beginning (erase command as typed)
+
+$ wc file   
+ - gives the wordcount of a file
+(line|wordcount|characters)
+ -  *.ext gives eveything that matches the extension (.ext)
+ - e.g., $ wc *.pdb     gives the wordcount for all pdb files in the directory
+ - wildcard is versatile, using p* gives you anything that starts with a p
+ - -l flag returns just number of lines, and can be used for multiple files, e.g. wc -l *.pdb
+ 
+ 
+use the ">" character to send output to a file (called redirection)
+ - e.g., $ wc *.pdb > lengths
+ - can sort the file and rename it as:
+ $ sort lengths > sorted_lengths
+ - note: avoid spaces in filenames (linux reads this as two separate files)
+    - use underscores ( a_b ), dashes ( a-b ), or CamelCase
+
+$ head -numberoflines filename
+to get "numberoflines" (e.g., 1, 2, etc) of the file
+
+use the pipe  |  to use multiple commands
+    e.g., $ sort lengths | head -1
+    to sort first then get the first line
+    - you can pipe as many commands together as you want
+    - becomes useful to pipe togetehr multiple commands and save output to a file with >
+    - example: wc -l *.pdb | sort | head -1 returns the .pdb file with the fewest lines
+x    
+    
+Control C gets you out of a jam when the computer is "hanging" 
+[Ctr-C interupts the current command]
+
+for loops: 
+- to get the first line in all the text files
+$ for filename in *.txt
+> do
+> head -1 $filename
+> done
+- the $ tells the shell that it is the variable defined at the beginning
+
+Automation! We can do for loops and if statements in the shell!
+
+scripts make your life easier! 
+go into an editor and create a file with your for loop and save it as a script
+(good practice is using indentation, but it doesn't really matter)
+using bash (bourne again shell)
+- $ bash script.sh
+will run your for loop
+
+example: 
+$ nano script.sh
+(in editor)
+for filename in *.txt
+do
+    mv $filename new_$filename
+done
+cntrl X (exit out and save the file)
+(back in shell)
+$ bash script.sh
+
+Pipe through grep, easy way to look for things 
+*/* | grep Z 
+# Look for everything in the directories above and below and see if it has Z in it. 
+
+R resources:
+
+https://plus.google.com/+GoogleDevelopers/posts/jQYhQ4ymReQ
+
+http://rpubs.com/SusanEJohnston/7953
+
+
+helpful hint: type your code in Rstudio's script window (on top) in order to maintain a record of what you have been typing. Code typed into the console is hard to get back to (need to use up/down arrow
+
+Lines starting with a # are comments
+# This is a comment
+
+Some of the familiar shell commands can also be used in R
+ - ls() # tells us what objects we have in our R environment
+ 
+We can tell R what to call things by using an assignment operator "=" or "<-"
+ > x = 5 # tells R that whenever x is typed into the console it is the same as typing 5
+  - this can be done with numbers/words/expressions/function outputs, etc
+> rm(x) # eliminates x from the environment
+
+If your cursor is on a command line, you can hit Ctrl-Enter and it will run
+After you assign a variable, e.g. x = 5, if you just type x, it will print out 5
+
+helpful note: if you run a line and get something that looks like:
+>"x'
++
+it means that R is looking for that last quotation mark, you can either complete the line with ", or if you do not know what R is looking for you can press escape to stop the code
+
+str(object) is a good way to find out what kind of information is being held in an object
+
+using a colon lets us get a sequence of integers
+> 1:5
+[1] 1 2 3 4 5 
+(hint: that [1] at the beginning of the output line is telling you what number you are at in the vector, so above it is saying that 1 is the first number in the vector from 1 to 5. this gets more helpful with larger vectors whose output spans multiple lines)
+
+Can mix characters and numbers in a vector
+vector <- c(1, "dog", "pony", 3)
+R will interpret all these things as characters
+
+Create a vector of a range of numbers
+vector <- c(1:6000)
+See how many items are in it
+length(vector)
+
+Three types of data formats
+
+Matrix
+Everything in it has to be the same type of data, e.g. character, integer
+m <- matrix(1:10, nrow=2, ncol=5)
+Matrices can be referenced by their index to pull out particular values
+e.g. this would only take the data from column 5
+day 5 <- m[,5]
+this takes just the data from the second row
+obs2 <- m[2,]
+
+Data frame
+These can have mixed types of data, so you can have factors and data
+
+Setting a working directory is a good way to keep everything in one place and get easy access to code, data, and output
+> setwd("filepath-in-quotes")
+> getwd() # prints your current working directory
+(hint: Rstudio supports tab complete!) 
+
+HELP! 
+use the function help() to get a help file
+> help(read.csv)
+OR
+> ?read.csv # helpfile for read.csv 
+> ??read.csv # searches R libraries for functions related to read.csv
+(with ?? you can search when you don't know the name of the function but don't use spaces unless you put your query in quotes)
+Then the help info will appear in the bottom right of RStudio
+
+read.csv() has a few extra helpful arguments when reading in data
+ - header = TRUE # the default says that the first row is the header row
+ - sep = "," # is the default but you can set it depending on what you know about your data
+
+When you read in data into R, be sure to save it to some object
+> data <- read.csv("mydatafile.csv")
+or you will not be able to do anything but look at it
+
+To get information about your data: 
+ - class(data) # is it numbers, characters, etc
+ - str(data) - tells the structure of the data, number of variables and observations
+ - dim(data) - gives us number of rows and columns of the data
+ - head(data) - look at the first 6 rows
+ - tail(data) - look at the last 6 rows
+ - nrow(data) - number of rows
+ - ncol(data) - number of columns
+ - colnames(), rownames(), names() gives column, row, column names respectively
+
+This is a nice site for explaining various data structures:
+http://adv-r.had.co.nz/Data-structures.html
+
+To coerce data into a different type we can use the functions:
+> as.matrix(data) to convert into a matrix
+note: if your data frame has mixed data types (numbers and characters) R will force everything to be a character because matrix can only hold a single class of data
+
+
+If you use read.csv, it brings your data in as a data frame
+
+You can use the paste()  function to put multiple outputs together into a more sentence like  structure (the function cat() works in a similar way)
+
+The apply function applies a function to the margins (rows or columns) of a dataframe or matrix 
+- margin = 1 is rows
+- margin = 2 is columns
+- you can also set margin = c(1,2) to apply the function to both row and columns (i.e., each individual cell) - but this doesn't really have any meaning for functions like mean, max, and min
+
+Here is a website with more information on the apply family of functions and when and how to use them: 
+http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/
+
+Columns are days
+Rows are patients
+
+Over in the environment/history area, you can see things that link to your data, so you can click on them and see your data
+
+# Working with a subset of the data
+sub_avg <- apply(data[2:10,], 2, mean)
+
+Use the dollar sign to call specific named columns out of a dataframe
+> my.data.frame$columnthatiwant
+
+The base plot function will plot x and y
+> plot(x, y)
+ALTERNATIVELY
+> plot(y~x) # says to plot y against x
+
+# Getting a new package
+install.packages("ggplot", dependencies=TRUE)
+You can also do it through the GUI
+Go to 'Tools' -> 'Install Packages'
+
+After you install the package you still need to load it into your workspace with:
+> library(package)
+
+In ggplot2 the main plotting function is ggplot()
+FIrst you give it a dataframe, then you give it aesthetics with aes(), then assign a geometry
+
+> ggplot(data, aes(x = Days, y = Inflammation) + geom_point()
+
+geom_line() is another useful geometry
+
+And for those who want more info about using ggplot2 to make pretty plots:
+http://www.cookbook-r.com/Graphs/
+
+A list of some common functions:
+ - mean
+ - max
+ - min 
+ - sd  - standard deviation
+
+STRUCTURE of a function:
+
+my_function_name <- function(input){
+    output <- things i want to do to the input
+    return(output)
+}
+
+Variable names should always be descriptive
+
+Think modular! Makes your code easier to understand and read later (and for other people)
+
+Try a function
+# Paste things together wiht no spaces between them
+fence <- function(wrapper, outer) {
+  out <- paste(wrapper, outer, wrapper, sep="")
+  return(out)
+}
+
+fence("*","sarah")
+gives
+"*sarah*"
+
+
+# Do the same but check to make sure it's numeric
+fence <- function(wrapper, outer) {
+  out <- paste(wrapper, outer, wrapper, sep="")
+  if (class(wrapper) == 'character' | class(outer) == "character") {
+    stop("Error: this is not numeric")
+  }
+  return(out)
+}
+
+# This won't work, because what you're entering are characters
+> fence("*","sarah")
+Error in fence("1", "0") : Error: this is not numeric
+# This will work, because the input is numeric
+> fence(1,0)
+[1] "101"
+
+Making comments inside your functions that says what that function does is a great way to document  your code
+
+Easy way to organize your code is to put all your functions into one script and then source that script 
+
+DAY 2
+The big problem: how to manage all of our work - we rename and copy and Dropbox, but these all can have problems as your # of collaborators goes up
+Version Control allows us to rewind to earlier points and track who has stuff
+There are many different types of version control, we're going to talk about github today
+
+Some more information about Git: 
+http://git-scm.com/book/en/Getting-Started
+
+Github
+Repositories are public unless you $. Some institutions have paid accounts for their researchers or students. You can also request a free period as a researcher at an educational institution.
+Github is most useful for text files. For word docs, pdfs, big image files, etc, they recommend other options: https://help.github.com/articles/what-is-my-disk-quota
+A "commit" is like a save and you can browse backward through commits.
+
+To make a local repository in a folder, navigate to the folder at the command line then type 
+$git init
+You can look at this directory using $ls -a to see the hidden files. Edit the description file if you want extra data
+
+Git has 3 basic bins - working - staging - history
+You only see the working unless you go looking
+
+You have to tell git to follow a working file using $git add <filename>
+That moves <filename> to staging
+Still not saved to history - you can see this using $git status
+To commit, you $git commit -m "put your informative commit message here"
+Note that commit only commits things that you have already moved to staging and you don't need to tell it a filename at the commit step (unless you only want to commit one of the staged files, in which case - yes, specify the filename)
+
+Why set up git at the specific project folder level instead of further up in the heirarchy? So when you go 
+$git log
+you only get commits related to one specific project instead of having to wade through commits for all your projects.
+
+$git diff
+tells you what changed between the history and the working
+$git diff --stat
+
+$git clone 
+to create a local copy of a repository
+$git push
+moves commits from your local copy to the cloud
+$git pull
+ to update your local repo
+ 
+ Remember to pull before you push (especially when a lot of people are working simulataneously on the same repo)
+ 
+ 
+ SQL
+ Database manager
+ The great thing - you pull in the data, you manipulate the data, but you don't actually alter your data.
+ 
+ Standard SQL practice is to use upper case for commands. 
+ 
+ Order of commands is important
+  - start simple and work up to more complex queries
+
+
+ SELECT something FROM table
+ WHERE
+ ORDER BY
+ GROUP BY
+ JOIN
+
+RANDOM() to get a random selection
+ORDER BY RANDOM() will rearrange the rows of your table differently each time
+SELECT COUNT(*) how many
+SUM() adds all things that match query
+- eg SELECT SUM(wgt) FROM surveys
+--- gives total grams in the the whole survey
+
+
+
+SELECT plots.plot_type, ROUND(AVG(surveys.wgt), 2) FROM surveys JOIN plots JOIN species ON (surveys.plot = plots.plot_id) AND (surveys.species = species.species_id) WHERE species.taxa = "Rodent" GROUP BY plots.plot_type
+
+
+To save queries you can go to the View menu and select Create View, then type your query into the "Select Statement" box 
+
+CREATE TABLE weather (rowid integer primary key, day integer, month integer, year integer, precip float, temp float, description text)
+
+INSERT INTO weather (day, month, year, precip, temp, description) 
+VALUES (22, 06, 2013, 3.1, 25, 'sunny')
+
+Paper on best practices:
+http://www.plosbiology.org/article/info%3Adoi%2F10.1371%2Fjournal.pbio.1001745
+
+ Please give us your feedback!
+ https://docs.google.com/forms/d/1XcfGCYUGs8j7ERfIedW9pMPKZ_seT2uhnBPH-EXqsgg/viewform
+ 
+ Email: 
+ Tracy Teal:  tkteal@google.com
+ Sarah Supp:  sarah@weecology.org
+ 
+
